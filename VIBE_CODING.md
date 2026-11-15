@@ -63,3 +63,17 @@ hamburguesa en móvil y enlace activo, `Footer`, y página de inicio temporal.
   los valores que cambian entre renders. Le pasé la captura a la IA, que propuso aislar el año en
   un componente con la directiva `"use cache"`. Alternativas descartadas: `connection()`
   (renderizaría todo bajo demanda sin necesidad) y mover el footer a un Client Component.
+
+  ---
+
+## Etapa 4: Dataset JSON y funciones de lectura
+
+**Prompt:** "siguiente".
+
+**Resultado:** `types/vehicle.ts`, `data/vehicles.json` (12 vehículos), `lib/vehicles.ts`
+(`getVehicles` con filtros, `getVehicleById`, `getFeaturedVehicles`, `getFilterOptions`) y `lib/format.ts`.
+
+**Decisiones técnicas:**
+- El JSON se importa como módulo (no con `fs`) para que funcione en Vercel y con Cache Components.
+- La lógica de filtrado vive en funciones puras reutilizadas por Server Components y Route Handlers.
+- IDs tipo slug para URLs legibles.
