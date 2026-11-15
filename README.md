@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoMarket
 
-## Getting Started
+Marketplace de compra de vehículos construido con Next.js 16 (App Router), TypeScript y Tailwind CSS.
+Proyecto de la actividad evaluada de Kodigo: "Implementación de Aplicación Next.js mediante Vibe Coding".
 
-First, run the development server:
+🔗 **Demo en producción:** _(pendiente de despliegue)_
+
+## Funcionalidades
+
+- Catálogo de vehículos con búsqueda y filtros (marca, tipo, precio, año).
+- Detalle de cada vehículo con ruta dinámica.
+- Favoritos guardados en el navegador.
+- Formulario de solicitud de compra con validación en servidor.
+- Diseño responsive, estados de carga y manejo de errores.
+
+## Tecnologías
+
+- Next.js 16 (App Router) + React
+- TypeScript
+- Tailwind CSS
+- Route Handlers como API interna; datos en `data/vehicles.json`
+
+## Instalación
 
 ```bash
+git clone <URL-DEL-REPOSITORIO>
+cd automarket
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La app queda disponible en http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Descripción | Obligatoria |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | URL pública del sitio, usada en metadata y enlaces | No |
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev`: servidor de desarrollo
+- `npm run build`: build de producción
+- `npm run start`: servidor de producción
+- `npm run lint`: revisión con ESLint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Decisiones y límites conocidos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Vercel no permite escribir archivos en tiempo de ejecución, por lo que los favoritos se guardan
+en `localStorage` y las solicitudes de compra se validan y confirman sin persistirse en base de datos.
+Más detalle en [`VIBE_CODING.md`](./VIBE_CODING.md).
 
-## Deploy on Vercel
+## Proceso de desarrollo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este proyecto se construyó con la metodología Vibe Coding (IA como copiloto).
+La bitácora completa está en [`VIBE_CODING.md`](./VIBE_CODING.md).
