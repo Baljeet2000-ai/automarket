@@ -23,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={inter.variable}>
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex min-h-screen flex-col bg-slate-50 font-sans text-slate-900">
         <Navbar />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">
           {children}
