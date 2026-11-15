@@ -1,7 +1,10 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import FilterBar from "@/components/filters/FilterBar";
 import VehicleResults from "@/components/vehicles/VehicleResults";
 import VehicleGridSkeleton from "@/components/vehicles/VehicleGridSkeleton";
+import Skeleton from "@/components/ui/Skeleton";
+import { getFilterOptions } from "@/lib/vehicles";
 
 export const metadata: Metadata = {
   title: "Catálogo de vehículos",
@@ -16,6 +19,8 @@ export default function CatalogPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
+  const options = getFilterOptions();
+
   return (
     <div className="space-y-6">
       <header>
@@ -26,6 +31,10 @@ export default function CatalogPage({
           Encuentra el vehículo que se ajusta a lo que buscas.
         </p>
       </header>
+
+      <Suspense fallback={<Skeleton className="h-44 w-full rounded-xl" />}>
+        <FilterBar options={options} />
+      </Suspense>
 
       <Suspense fallback={<VehicleGridSkeleton />}>
         <VehicleResults searchParams={searchParams} />

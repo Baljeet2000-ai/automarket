@@ -121,3 +121,19 @@ y `GET /api/vehiculos/[id]` con 404 JSON si no existe. Función `parseFilters` e
   Con la IA entendí que eran falsos positivos del editor: el servidor de TypeScript estaba desactualizado
   (se reinició) y el validador CSS integrado no reconoce Tailwind v4. La verificación real se hizo
   con `npx tsc --noEmit`.
+
+  ---
+
+## Etapa 7: Catálogo con skeleton de carga
+
+**Prompt:** "Siguiente".
+
+**Resultado:** página `/vehiculos` con resultados filtrables por URL, contador de resultados,
+estado vacío con botón para limpiar filtros, `Skeleton`, `VehicleGridSkeleton` y `loading.tsx`.
+
+**Decisiones técnicas:**
+- Con Cache Components, `searchParams` se lee dentro de un componente asíncrono (`VehicleResults`)
+  envuelto en `<Suspense>`; la página en sí es un cascarón estático.
+- Filtros por parámetros de URL (compartibles y compatibles con el historial del navegador),
+  reutilizando `parseFilters` y `getVehicles`.
+- El skeleton replica la forma de la tarjeta para evitar saltos de diseño.
