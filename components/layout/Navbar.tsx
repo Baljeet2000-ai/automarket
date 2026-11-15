@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const links = [
   { href: "/", label: "Inicio" },
@@ -14,9 +15,23 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { count } = useFavorites();
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const countBadge = (href: string) =>
+    href === "/favoritos" && count > 0 ? (
+      <>
+        <span
+          aria-hidden="true"
+          className="ml-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-blue-700 px-1.5 text-xs font-semibold text-white"
+        >
+          {count}
+        </span>
+        <span className="sr-only"> ({count} guardados)</span>
+      </>
+    ) : null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
@@ -38,13 +53,14 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                className={`inline-flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                   isActive(link.href)
                     ? "bg-blue-50 text-blue-700"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
                 {link.label}
+                {countBadge(link.href)}
               </Link>
             </li>
           ))}
@@ -87,13 +103,14 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded-md px-3 py-2 text-base font-medium ${
+                className={`flex items-center rounded-md px-3 py-2 text-base font-medium ${
                   isActive(link.href)
                     ? "bg-blue-50 text-blue-700"
                     : "text-slate-700 hover:bg-slate-100"
                 }`}
               >
                 {link.label}
+                {countBadge(link.href)}
               </Link>
             </li>
           ))}

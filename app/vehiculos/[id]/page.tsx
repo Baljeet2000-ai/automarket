@@ -8,6 +8,7 @@ import VehicleSpecs from "@/components/vehicles/VehicleSpecs";
 import VehicleGrid from "@/components/vehicles/VehicleGrid";
 import { getVehicleById, getVehicles } from "@/lib/vehicles";
 import { bodyTypeLabels, fuelLabels, formatPrice } from "@/lib/format";
+import FavoriteButton from "@/components/favorites/FavoriteButton";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -95,13 +96,14 @@ export default async function VehicleDetailPage({ params }: PageProps) {
 
           <VehicleSpecs vehicle={vehicle} />
 
-          <div className="flex flex-col gap-3 sm:flex-row">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <ButtonLink
               href={`/solicitud?vehiculo=${vehicle.id}`}
               className="sm:flex-1"
             >
               Solicitar compra
             </ButtonLink>
+            <FavoriteButton vehicleId={vehicle.id} name={name} variant="full" />
             <ButtonLink href="/vehiculos" variant="secondary">
               Volver al catálogo
             </ButtonLink>

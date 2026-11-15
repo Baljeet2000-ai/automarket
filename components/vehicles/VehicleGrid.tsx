@@ -1,4 +1,5 @@
 import type { Vehicle } from "@/types/vehicle";
+import FavoriteButton from "@/components/favorites/FavoriteButton";
 import VehicleCard from "./VehicleCard";
 
 interface VehicleGridProps {
@@ -13,7 +14,16 @@ export default function VehicleGrid({
   return (
     <div className={`grid grid-cols-1 gap-6 ${className}`}>
       {vehicles.map((vehicle) => (
-        <VehicleCard key={vehicle.id} vehicle={vehicle} />
+        <VehicleCard
+          key={vehicle.id}
+          vehicle={vehicle}
+          action={
+            <FavoriteButton
+              vehicleId={vehicle.id}
+              name={`${vehicle.brand} ${vehicle.model}`}
+            />
+          }
+        />
       ))}
     </div>
   );

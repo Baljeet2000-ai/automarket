@@ -157,3 +157,19 @@ Componente reutilizable `Select`.
 - Las opciones de los filtros se calculan en el servidor y se pasan como props.
 - `FilterBar` va dentro de `<Suspense>` porque `useSearchParams` es dato de la petición.
 
+---
+
+## Etapa 9: Página de detalle con ruta dinámica
+
+**Prompt:** "Siguiente".
+
+**Resultado:** `/vehiculos/[id]` con migas de pan, imagen, precio, ficha técnica (`VehicleSpecs`),
+botón de solicitud, vehículos relacionados, `generateMetadata`, `loading.tsx` y `not-found.tsx` propio.
+
+**Decisiones técnicas:**
+- `generateStaticParams` para prerenderizar una página por vehículo; compatible con Cache Components.
+- `notFound()` con un `not-found.tsx` específico para IDs inexistentes (404 real).
+- Metadata dinámica por vehículo.
+- Todo Server Component; el botón de favoritos (etapa 10) será el único componente cliente.
+- Los vehículos relacionados reutilizan `VehicleGrid` y `getVehicles`.
+
