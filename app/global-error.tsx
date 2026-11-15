@@ -22,7 +22,7 @@ export default function GlobalError({
             página.
           </p>
           {error.digest && (
-            <p className="mt-2 text-xs text-slate-400">
+            <p className="mt-2 text-xs text-slate-500">
               Código de error: {error.digest}
             </p>
           )}

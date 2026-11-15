@@ -23,7 +23,7 @@ export default function ErrorState({
       <h1 className="mt-2 text-3xl font-bold text-slate-900">{title}</h1>
       <p className="mx-auto mt-3 max-w-md text-slate-600">{message}</p>
       {digest && (
-        <p className="mt-2 text-xs text-slate-400">Código de error: {digest}</p>
+        <p className="mt-2 text-xs text-slate-500">Código de error: {digest}</p>
       )}
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <button

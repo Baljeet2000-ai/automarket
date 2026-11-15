@@ -24,8 +24,18 @@ export default function RootLayout({
   return (
     <html lang="es" className={inter.variable}>
       <body className="flex min-h-screen flex-col bg-slate-50 font-sans text-slate-900">
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-blue-700 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Saltar al contenido
+        </a>
         <Navbar />
-        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">
+        <main
+          id="contenido"
+          tabIndex={-1}
+          className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 focus:outline-none sm:px-6"
+        >
           {children}
         </main>
         <Footer />

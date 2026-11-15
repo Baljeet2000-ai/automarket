@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <div className="space-y-14">
       {/* Hero */}
-      <section className="rounded-2xl bg-gradient-to-br from-blue-700 to-blue-500 px-6 py-14 text-center text-white sm:px-12 sm:py-20">
+      <section className="rounded-2xl bg-gradient-to-br from-blue-800 to-blue-600 px-6 py-14 text-center text-white sm:px-12 sm:py-20">
         <h1 className="text-3xl font-bold sm:text-5xl">
           Encuentra el vehículo ideal para ti
         </h1>

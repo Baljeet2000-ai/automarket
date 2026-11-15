@@ -61,7 +61,7 @@ export default function FavoriteButton({
           ? `Quitar ${name} de favoritos`
           : `Guardar ${name} en favoritos`
       }
-      className={`rounded-full bg-white/90 p-2 shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-white ${
+      className={`rounded-full bg-white/90 p-2.5 shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-white ${
         active ? "text-red-500" : "text-slate-500 hover:text-red-500"
       }`}
     >

@@ -217,5 +217,22 @@ errores por campo, estado de envío, alerta de error de red y confirmación con 
   la ruta (un fallo de código habría dado 500). Al listar los archivos con `Get-ChildItem` descubrí
   que el Route Handler había quedado dentro de `app/api/vehiculos/solicitudes/` en lugar de
   `app/api/solicitudes/`. En App Router la URL de una API depende de la estructura de carpetas, así
-  que la movía a la ubicación correcta. Aprendizaje: leer el código de estado en la terminal y
+  que la moví a a la ubicación correcta. Aprendizaje: leer el código de estado en la terminal y
   verificar la estructura de carpetas antes de sospechar del código.
+
+
+  ---
+
+## Etapa 12: error.tsx global y por ruta
+
+**Prompt:** "Siguiente".
+
+**Resultado:** `ErrorState` reutilizable, `app/error.tsx`, `app/vehiculos/error.tsx` (cubre catálogo
+y detalle) y `app/global-error.tsx` para fallos del layout raíz.
+
+**Decisiones técnicas:**
+- Jerarquía de límites de error: mensaje específico en `/vehiculos`, general en `app/`, crítico en `global-error`.
+- Reintento con `router.refresh()` + `reset()` dentro de `startTransition`, para volver a pedir los datos al servidor.
+- `useEffect` para registrar el error en consola; se muestra el `digest` sin exponer detalles internos.
+- `global-error.tsx` incluye `html`, `body` y los estilos, porque sustituye al layout.
+
