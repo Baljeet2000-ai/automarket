@@ -212,4 +212,10 @@ errores por campo, estado de envío, alerta de error de red y confirmación con 
 - Se descartó el historial de "Mis solicitudes" de la propuesta inicial para mantener el alcance acotado.
 
 **Desafíos y cómo se resolvieron:**
-- _(completar si algo falla al probar)_
+- El formulario mostraba "No pudimos enviar tu solicitud" con los datos correctos. Revisando la
+  terminal de `npm run dev` vi `POST /api/solicitudes 404`, lo que indicó que Next.js no encontraba
+  la ruta (un fallo de código habría dado 500). Al listar los archivos con `Get-ChildItem` descubrí
+  que el Route Handler había quedado dentro de `app/api/vehiculos/solicitudes/` en lugar de
+  `app/api/solicitudes/`. En App Router la URL de una API depende de la estructura de carpetas, así
+  que la movía a la ubicación correcta. Aprendizaje: leer el código de estado en la terminal y
+  verificar la estructura de carpetas antes de sospechar del código.
