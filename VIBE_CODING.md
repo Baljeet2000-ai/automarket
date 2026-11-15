@@ -137,3 +137,23 @@ estado vacío con botón para limpiar filtros, `Skeleton`, `VehicleGridSkeleton`
 - Filtros por parámetros de URL (compartibles y compatibles con el historial del navegador),
   reutilizando `parseFilters` y `getVehicles`.
 - El skeleton replica la forma de la tarjeta para evitar saltos de diseño.
+
+
+---
+
+## Etapa 8: Filtros por marca, tipo, precio y año
+
+**Prompt:** "Siguiente".
+
+**Resultado:** `FilterBar` (Client Component) con búsqueda por texto con debounce, selectores de
+marca, tipo, precio máximo, año mínimo y orden, botón para limpiar y estado "Actualizando…".
+Componente reutilizable `Select`.
+
+**Decisiones técnicas:**
+- Los filtros viven en la URL (`useSearchParams` + `router.replace`): compartibles, compatibles con
+  atrás/adelante y sin duplicar estado; la página Server se actualiza con los nuevos `searchParams`.
+- `useState` + `useEffect` solo para el texto de búsqueda (debounce de 400 ms).
+- `useTransition` para mostrar el estado pendiente sin bloquear la interfaz.
+- Las opciones de los filtros se calculan en el servidor y se pasan como props.
+- `FilterBar` va dentro de `<Suspense>` porque `useSearchParams` es dato de la petición.
+
