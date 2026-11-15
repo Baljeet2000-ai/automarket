@@ -173,3 +173,43 @@ botón de solicitud, vehículos relacionados, `generateMetadata`, `loading.tsx` 
 - Todo Server Component; el botón de favoritos (etapa 10) será el único componente cliente.
 - Los vehículos relacionados reutilizan `VehicleGrid` y `getVehicles`.
 
+
+---
+
+## Etapa 10: Favoritos con localStorage y página /favoritos
+
+**Prompt:** "Siguiente".
+
+**Resultado:** hook `useFavorites`, `FavoriteButton` (variantes icono y completo), contador en el
+navbar, página `/favoritos` con `FavoritesList` (consume `GET /api/vehiculos?ids=` con `fetch`),
+estados de carga, error con reintento y lista vacía, y componente `Alert`.
+
+**Decisiones técnicas:**
+- Favoritos en `localStorage` (Vercel no permite escribir archivos y no hay base de datos).
+- `useSyncExternalStore` para leer el almacenamiento: sin errores de hidratación y con todos los
+  botones, el contador y las pestañas sincronizados.
+- `useState` + `useEffect` con `AbortController` para consumir la API desde `FavoritesList`.
+- El estado "cargando" se deriva comparando la clave de la petición, evitando `setState` síncrono en el efecto.
+- El botón de favoritos se inyecta mediante la prop `action` de la tarjeta, fuera del `Link`.
+
+
+---
+
+## Etapa 11: Formulario y Route Handler de solicitud de compra
+
+**Prompt:** "Siguiente".
+
+**Resultado:** `POST /api/solicitudes` con validación (201, 400, 422), formulario `/solicitud`
+con selección de vehículo (preseleccionado desde `?vehiculo=`), validación en cliente y servidor,
+errores por campo, estado de envío, alerta de error de red y confirmación con número de referencia.
+
+**Decisiones técnicas:**
+- Validación única en `lib/validators.ts`, usada en cliente y servidor; recibe una función para
+  verificar el vehículo y así no incluir el JSON de datos en el bundle del cliente.
+- Códigos HTTP diferenciados y manejados por el formulario (201 / 422 / error de red).
+- Formulario controlado con `useState`; foco automático al primer campo con error.
+- Las solicitudes no se persisten (Vercel no permite escribir archivos); la confirmación lo aclara.
+- Se descartó el historial de "Mis solicitudes" de la propuesta inicial para mantener el alcance acotado.
+
+**Desafíos y cómo se resolvieron:**
+- _(completar si algo falla al probar)_
