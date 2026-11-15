@@ -40,4 +40,26 @@ sin carpeta `src`), estructura de carpetas base, `.env.example`, README y esta b
 - Sin carpeta `src/` para mantener `app/` en la raíz, simple y alineado con la documentación de Next.js.
 - `.env.example` con una sola variable opcional, ya que no hay claves secretas.
 
-**Desafíos:** _(completar si surge algo al correr el setup)_
+**Desafíos:** 
+- Intenté copiar `.env.example` antes de crearlo: la IA me dio su contenido en el chat, pero el archivo
+  no existe hasta crearlo manualmente. Lo resolví creándolo con `Set-Content` en PowerShell.
+---
+
+## Etapa 3: Layout con navbar responsive y footer
+
+**Prompt:** "siguiente" (continuación del plan aprobado en la etapa 1).
+
+**Resultado:** `layout.tsx` con fuente Inter, metadata con plantilla de título, `Navbar` con menú
+hamburguesa en móvil y enlace activo, `Footer`, y página de inicio temporal.
+
+**Decisiones técnicas:**
+- Solo `Navbar` es Client Component (`useState` y `usePathname`); `Footer` y `layout` son Server Components.
+- Se reemplazó `globals.css` para quitar el modo oscuro automático del template, que chocaba con el diseño.
+- Diseño mobile-first con Tailwind (`md:` para escritorio) y atributos ARIA en el menú móvil.
+
+**Desafíos y cómo se resolvieron:**
+- Next.js 16.4.6 mostró el error "Next.js encountered the unstable value `new Date()` while prerendering"
+  en el Footer. Mi proyecto tiene Cache Components activado, que exige decidir cuándo se calculan
+  los valores que cambian entre renders. Le pasé la captura a la IA, que propuso aislar el año en
+  un componente con la directiva `"use cache"`. Alternativas descartadas: `connection()`
+  (renderizaría todo bajo demanda sin necesidad) y mover el footer a un Client Component.
