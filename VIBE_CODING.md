@@ -77,3 +77,47 @@ hamburguesa en móvil y enlace activo, `Footer`, y página de inicio temporal.
 - El JSON se importa como módulo (no con `fs`) para que funcione en Vercel y con Cache Components.
 - La lógica de filtrado vive en funciones puras reutilizadas por Server Components y Route Handlers.
 - IDs tipo slug para URLs legibles.
+
+
+---
+
+## Etapa 5: Route Handlers de vehículos con filtros
+
+**Prompt:** "siguiente".
+
+**Resultado:** `GET /api/vehiculos` (filtros por q, brand, bodyType, rango de precio y año, orden e ids)
+y `GET /api/vehiculos/[id]` con 404 JSON si no existe. Función `parseFilters` en `lib/filters.ts`.
+
+**Decisiones técnicas:**
+- `parseFilters` se comparte entre la API y el catálogo para no duplicar lógica.
+- Los parámetros numéricos inválidos se ignoran para que la API sea tolerante.
+- `params` se resuelve con `await` porque en Next.js 16 es una Promise.
+- Respuestas con forma consistente (`{ data, total }` / `{ error }`) y códigos HTTP correctos.
+
+
+## Etapa 6: Página de inicio con vehículos destacados
+
+**Prompt:** "siguiente".
+
+**Resultado:** componentes UI (`ButtonLink`, `Badge`), `VehicleImage` (con imagen de respaldo),
+`VehicleCard`, `VehicleGrid` y la página de inicio con hero, categorías y destacados.
+
+**Decisiones técnicas:**
+- Solo `VehicleImage` es Client Component (`useState` para detectar imágenes rotas); el resto es Server.
+- `next/image` con `fill` y `sizes` para imágenes optimizadas y responsive.
+- La tarjeta tiene una prop `action` reservada para el botón de favoritos (etapa 10).
+- La página se prerenderiza porque los datos salen de un JSON importado.
+
+**Desafíos y cómo se resolvieron:**
+- Al navegar a una ruta aún inexistente y volver al Inicio, el fondo quedaba negro y los títulos
+  invisibles. Mi primer intento (con la IA) fue declarar `color-scheme: light` y fijar los colores
+  en el `<body>`, pero no lo resolvió. Al seguir reportándolo con capturas, la IA identificó la causa
+  real: la página 404 por defecto de Next.js inyecta estilos propios (fondo negro en modo oscuro del
+  sistema) que persisten tras la navegación del lado del cliente y pesan más que las clases de Tailwind.
+  Se resolvió creando un `app/not-found.tsx` personalizado.
+  Aprendizaje: validar el diagnóstico de la IA probándolo, e insistir con evidencia cuando el primer
+  arreglo no funciona.
+- VS Code mostró errores "Cannot find module" y advertencias "Unknown at rule @theme/@apply".
+  Con la IA entendí que eran falsos positivos del editor: el servidor de TypeScript estaba desactualizado
+  (se reinició) y el validador CSS integrado no reconoce Tailwind v4. La verificación real se hizo
+  con `npx tsc --noEmit`.
