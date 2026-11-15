@@ -236,3 +236,20 @@ y detalle) y `app/global-error.tsx` para fallos del layout raíz.
 - `useEffect` para registrar el error en consola; se muestra el `digest` sin exponer detalles internos.
 - `global-error.tsx` incluye `html`, `body` y los estilos, porque sustituye al layout.
 
+
+---
+
+## Etapa 13: Pulido responsive y accesibilidad
+
+**Prompt:** "Siguiente".
+
+**Resultado:** foco visible global, enlace "Saltar al contenido", `aria-current` en el menú, mejoras
+de contraste (hero y código de error), filtros en dos columnas en móvil, botón de favoritos más
+grande y soporte para `prefers-reduced-motion`. Verificación con teclado, tres anchos de pantalla,
+zoom al 200 % y Lighthouse.
+
+**Decisiones técnicas:**
+- Estilo de foco en `@layer base` para no entrar en conflicto con las utilidades de Tailwind.
+- Contraste revisado contra el mínimo de 4.5:1 (WCAG AA).
+- Pruebas manuales en 360, 768 y 1280 px.
+
