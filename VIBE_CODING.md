@@ -1,3 +1,32 @@
+## Resumen del proceso
+
+**Herramienta de IA:** Claude (Anthropic), usado como copiloto de desarrollo en un chat.
+**Metodología:** primero redacté un prompt estructurado a partir de las instrucciones de la actividad.
+Con él la IA propuso arquitectura, modelo de datos y plan de commits, que yo revisé y ajusté antes de
+programar. Luego trabajamos en 15 etapas pequeñas; en cada una yo probaba el código, reportaba errores
+con capturas y la IA corregía.
+
+| Etapa | Qué se construyó |
+|---|---|
+| 1 | Planificación y arquitectura |
+| 2 | Setup del proyecto |
+| 3 | Layout con navbar responsive y footer |
+| 4 | Dataset JSON y funciones de lectura |
+| 5 | Route Handlers de vehículos |
+| 6 | Página de inicio y tarjetas |
+| 7 | Catálogo con skeleton de carga |
+| 8 | Filtros en la URL |
+| 9 | Detalle con ruta dinámica |
+| 10 | Favoritos con localStorage |
+| 11 | Formulario y API de solicitud |
+| 12 | Páginas de error |
+| 13 | Pulido responsive y accesibilidad |
+| 14 | Despliegue en Vercel |
+| 15 | Documentación y revisión final |
+
+**Decisiones que tomé yo, no la IA:** descartar Supabase y usar solo Route Handlers con JSON; el tema
+de la aplicación (compra de vehículos); la paleta y el nombre; qué incluir en cada etapa antes de seguir.
+
 # Bitácora de Vibe Coding: AutoMarket
 
 **Herramienta de IA:** Claude (Anthropic)
@@ -253,3 +282,25 @@ zoom al 200 % y Lighthouse.
 - Contraste revisado contra el mínimo de 4.5:1 (WCAG AA).
 - Pruebas manuales en 360, 768 y 1280 px.
 
+---
+
+## Apéndice: prompt inicial
+
+Prompt estructurado en 5 secciones (contexto, requisitos técnicos, entregables, rúbrica y forma de trabajo)
+que pegué completo al inicio de la conversación:
+
+<details>
+<summary>Ver el prompt completo</summary>
+
+(pega aquí el texto completo del prompt que usaste)
+
+</details>
+
+## Reflexión final
+
+- **Qué funcionó bien:** trabajar por etapas pequeñas con commit y bitácora al cerrar cada una; pedir la
+  arquitectura antes del código; probar cada etapa antes de seguir.
+- **Dónde tuve que corregir a la IA:** comandos de Bash en un entorno PowerShell; el primer diagnóstico
+  del fondo negro era incompleto; archivos creados en la ruta equivocada.
+- **Qué haría distinto:** indicar mi sistema operativo desde el primer prompt, y verificar con
+  `git ls-files` lo que realmente queda en el repositorio antes de desplegar.
